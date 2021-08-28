@@ -1,5 +1,5 @@
-""" For production, instead use `gunicorn death:server` """
+""" For production, instead use `gunicorn death.app:server` """
 
-from . import app
+from .app import app
 
 app.run_server(debug=True)
