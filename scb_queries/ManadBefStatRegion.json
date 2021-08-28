@@ -1,0 +1,17 @@
+{
+    "query": [
+      {
+        "code": "Forandringar",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "100",
+            "130"
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json-stat2"
+    }
+  }
