@@ -16,7 +16,12 @@ cache = Cache(
     }
 )
 
-app = dash.Dash(__name__)
+app = dash.Dash(
+    __name__,
+    title="Döda i Sverige",
+    meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
+)
+
 server = app.server
 cache.init_app(server)
 
@@ -45,11 +50,19 @@ def serve_layout():
     for d in data.values():
         fig.add_scatter(x=d["df"].index, y=d["df"], name=d["name"], mode=d["mode"])
 
-    fig.layout.yaxis.tickformat = ",.2%"
-    fig.layout.title = "Andel av befolkningen som dött under ett år"
-    fig.layout.xaxis.title = "Året som löpte fram till datum"
-    fig.layout.yaxis.title = "Andel som dött"
-    fig.layout.yaxis.rangemode = "tozero"
+    fig.update_layout(
+        {
+            "title": "Andel av befolkningen som dött under ett år",
+            "yaxis": {
+                "title": "Andel som dött",
+                "tickformat": ",.2%",
+                "rangemode": "tozero",
+            },
+            "xaxis": {"title": "Året som löpte fram till datum"},
+            "legend": {"yanchor": "top", "y": 0.99, "xanchor": "left", "x": 0.01},
+            "margin": {"l": 10, "r": 10, "t": 80, "b": 10},
+        }
+    )
 
     return html.Div(
         [
@@ -58,14 +71,16 @@ def serve_layout():
                 # Döda i Sverige
                 """
             ),
-            dcc.Graph(id="graph", figure=fig),
+            dcc.Graph(id="graph", figure=fig, responsive=True),
             dcc.Markdown(
                 """
                 Källor:
 
-                * https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/tabell-och-diagram/preliminar-statistik-over-doda/
-                * http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101G/BefUtvKon1749
-                * http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101G/ManadBefStatRegion
+                * [SCB: Befolkningsutvecklingen i riket efter kön](http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101G/BefUtvKon1749)
+                * [SCB: Befolkningsstatistik efter region och kön](http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101G/ManadBefStatRegion)
+                * [SCB: Preliminär statistik över döda](https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/tabell-och-diagram/preliminar-statistik-over-doda/)
+
+                [Källkod](https://github.com/per42/death/tree/master)
                 """
             ),
         ]

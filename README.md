@@ -1,15 +1,17 @@
-## Data
+## Användning
 
-Ladda ned statistik:
+Installera miljö:
+
+    apt install redis-server
+    pip install gunicorn
+    redis-server &
+    export REDIS_URL=redis://localhost:6379
+
+Hämta data regelbundet:
 
     ./download_data.sh
+    python -m death.update
 
-Installera detta paket:
+Starta webserver:
 
-    pip install flit
-    flit install
-
-Kör:
-
-    pip install gunicorn
-    gunicorn death:server
+    gunicorn death.app:server
