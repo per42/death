@@ -73,12 +73,12 @@ def serve_layout():
             ),
             dcc.Graph(id="graph", figure=fig, responsive=True),
             dcc.Markdown(
-                """
+                f"""
                 Källor:
 
                 * [SCB: Befolkningsutvecklingen i riket efter kön](http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101G/BefUtvKon1749)
                 * [SCB: Befolkningsstatistik efter region och kön](http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101G/ManadBefStatRegion)
-                * [SCB: Preliminär statistik över döda](https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/tabell-och-diagram/preliminar-statistik-over-doda/)
+                * [SCB: Preliminär statistik över döda]({cache.get("prel-url").decode("utf8")})
 
                 [Källkod](https://github.com/per42/death/tree/master)
                 """

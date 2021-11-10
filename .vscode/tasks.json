@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "web server",
+			"runOptions": {
+				"instanceLimit": 1
+			},
+			"type": "process",
+			"command": "gunicorn",
+			"args": [
+				"death.app:server"
+			],
+			"problemMatcher": []
+		}
+	]
+}

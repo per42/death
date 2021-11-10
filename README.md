@@ -9,7 +9,7 @@ Installera miljö:
 
 Hämta data regelbundet:
 
-    ./download_data.sh
+    python -m death.download
     python -m death.update
 
 Starta webserver:

@@ -19,3 +19,6 @@ for k, v in data.items():
     with BytesIO() as f:
         v.to_pickle(f)
         cache.set(k, f.getvalue())
+
+with open("data/prel-url") as f:
+	cache.set("prel-url", f.read())
